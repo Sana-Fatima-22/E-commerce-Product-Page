@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Heels Product Page</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <nav>
+        <ul class="navbar">
+            <li><a href="home.html">Home</a></li>
+            <li><a href="product.html" class="active">Products</a></li>
+            <li><a href="contact.html">Contact Us</a></li>
+            <li><a href="about.html">About</a></li>
+        </ul>
+    </nav>
+
+    <div class="container mt-5">
+        <div class="row">
+            <div class="col-md-6">
+                <img id="mainImage" src="women1.jpg" class="img-fluid mb-3" alt="Product Image">
+                <div class="d-flex mt-3">
+                    <img src="women1.jpg" class="img-thumbnail me-2" alt="Thumbnail 1" onclick="changeImage('women1.jpg')">
+                    <img src="women5.jpg" class="img-thumbnail me-2" alt="Thumbnail 3" onclick="changeImage('women5.jpg')">
+                </div>
+            </div>
+            <div class="col-md-6">
+                <h1 class="product-title">Heels</h1>
+                <p class="product-description">Detailed description of the Heels.</p>
+                <h2 id="price">Price: PKR 3,199</h2>
+                
+                <div class="form-group mb-3">
+                    <label for="size">Size:</label>
+                    <select id="size" class="form-select" onchange="updatePrice('size', 'color', 'price', basePrice)">
+                        <option value="small">Small</option>
+                        <option value="medium">Medium</option>
+                        <option value="large">Large</option>
+                    </select>
+                </div>
+
+                <div class="form-group mb-3">
+                    <label for="color">Color:</label>
+                    <select id="color" class="form-select" onchange="updatePrice('size', 'color', 'price', basePrice)">
+                        <option value="Dark Red">Dark Red</option>
+                        <option value="Brown">Brown</option>
+                    </select>
+                </div>
+
+                <button class="btn btn-primary" onclick="addToCart('Heels')">Add to Cart</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="cartPopup" class="cart-popup">
+        <h2>Cart Summary</h2>
+        <ul id="cartItems"></ul>
+        <button class="btn btn-secondary" onclick="closeCart()">Close</button>
+    </div>
+
+    <script>
+        let basePrice = 3199;
+
+        function changeImage(imageUrl) {
+            document.getElementById('mainImage').src = imageUrl;
+        }
+
+        function updatePrice(sizeId, colorId, priceId, basePrice) {
+            let size = document.getElementById(sizeId).value;
+            let color = document.getElementById(colorId).value;
+            let finalPrice = basePrice;
+
+            if (size === 'medium') {
+                finalPrice += 1000;
+            } else if (size === 'large') {
+                finalPrice += 2000;
+            }
+
+            if (color === 'Dark Red') {
+                finalPrice += 500;
+            } else if (color === 'red') {
+                finalPrice += 1000;
+            }
+
+            document.getElementById(priceId).innerText = "Price: PKR " + finalPrice.toLocaleString();
+        }
+
+        function addToCart(productName) {
+            let size = document.getElementById('size').value;
+            let color = document.getElementById('color').value;
+            let price = document.getElementById('price').innerText.split(": ")[1];
+
+            let cartItem = `${productName} - ${size}, ${color} - ${price}`;
+            let cartItems = document.getElementById('cartItems');
+            let li = document.createElement('li');
+            li.textContent = cartItem;
+            cartItems.appendChild(li);
+
+            document.getElementById('cartPopup').style.display = 'block';
+        }
+
+        function closeCart() {
+            document.getElementById('cartPopup').style.display = 'none';
+        }
+    </script>
+</body>
+</html>

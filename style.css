@@ -1,0 +1,103 @@
+.navbar {
+  list-style: none;
+  display: flex;
+  justify-content: space-around;
+  background-color: #333;
+  padding: 1rem;
+}
+
+.navbar li {
+  display: inline;
+  margin-right: 10px; /* Adjusted from 20px */
+}
+
+.navbar a {
+  color: white;
+  text-decoration: none;
+  padding: 0.5rem 1rem;
+}
+
+.navbar a.active {
+  background-color: #007bff;
+  color: white;
+}
+
+.cart-popup {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: white;
+  padding: 2rem;
+  box-shadow: 0 0 10px rgba(0,0,0,0.5);
+  display: none;
+}
+/* Global Styles */
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f8f9fa; /* Light gray background */
+  color: #333; /* Dark gray text color */
+}
+
+/* Navigation Bar Styles */
+nav {
+  background-color: #343a40; /* Dark background */
+  padding: 10px 0;
+}
+
+nav ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  text-align: center;
+}
+
+nav ul li {
+  display: inline;
+  margin-right: 10px;
+}
+
+nav ul li a {
+  color: #fff; /* White text color */
+  text-decoration: none;
+  padding: 10px 15px;
+  border-radius: 5px;
+}
+
+nav ul li a:hover {
+  background-color: #555; /* Darker background on hover */
+}
+
+nav ul li a.active {
+  background-color: #007bff; /* Primary color for active link */
+}
+
+
+/* Heading styles */
+h1 {
+  text-align: center;
+  margin-top: 20px;
+  margin-bottom: 30px;
+  color: #333; /* Dark text color */
+}
+
+/* Card styles */
+.card {
+  border: 1px solid #ccc; /* Gray border */
+  transition: transform 0.3s ease;
+  margin-bottom: 20px;
+}
+
+.card:hover {
+  transform: translateY(-5px); /* Lift card slightly on hover */
+}
+
+.card-title {
+  margin-top: 10px;
+  font-size: 1.2rem; /* Larger font size for card titles */
+}
+
+.card-img-top {
+  height: 250px; /* Fixed height for card images */
+  object-fit: cover; /* Cover aspect ratio for images */
+}

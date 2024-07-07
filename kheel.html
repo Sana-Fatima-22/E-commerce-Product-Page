@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kitten Heels Product Page</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <nav>
+        <ul class="navbar">
+            <li><a href="home.html">Home</a></li>
+            <li><a href="product.html" class="active">Products</a></li>
+            <li><a href="contact.html">Contact Us</a></li>
+            <li><a href="about.html">About</a></li>
+        </ul>
+    </nav>
+
+    <div class="container mt-5">
+        <div class="row">
+            <div class="col-md-6">
+                <img id="mainImage" src="kheel11.jpg" class="img-fluid mb-3" alt="Product Image">
+                <div class="d-flex mt-3">
+                    <img src="kheel11.jpg" class="img-thumbnail me-2" alt="Thumbnail 1" onclick="changeImage('kheel11.jpg')">
+                    <img src="kheel2.jpg" class="img-thumbnail me-2" alt="Thumbnail 2" onclick="changeImage('kheel2.jpg')">
+                </div>
+            </div>
+            <div class="col-md-6">
+                <h1 class="product-title">Kitten Heels</h1>
+                <p class="product-description">Detailed description of the Heels.</p>
+                <h2 id="price">Price: PKR <span data-base-price="3000">3,000</span></h2>
+                
+                <div class="form-group mb-3">
+                    <label for="size">Size:</label>
+                    <select id="size" class="form-select" onchange="updatePrice()">
+                        <option value="small">Small</option>
+                        <option value="medium">Medium</option>
+                        <option value="large">Large</option>
+                    </select>
+                </div>
+
+                <div class="form-group mb-3">
+                    <label for="color">Color:</label>
+                    <select id="color" class="form-select" onchange="updatePrice()">
+                        <option value="Chartreuse">Chartreuse</option>
+                        <option value="Pink">Pink</option>
+                    </select>
+                </div>
+
+                <button class="btn btn-primary" onclick="addToCart('Kitten Heels')">Add to Cart</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="cartPopup" class="cart-popup">
+        <h2>Cart Summary</h2>
+        <ul id="cartItems"></ul>
+        <button class="btn btn-secondary" onclick="closeCart()">Close</button>
+    </div>
+    <script>
+        let basePrice = 3000;
+
+        function changeImage(imageUrl) {
+            document.getElementById('mainImage').src = imageUrl;
+        }
+
+        function updatePrice() {
+            let size = document.getElementById('size').value;
+            let color = document.getElementById('color').value;
+            let basePriceElement = document.querySelector('#price span[data-base-price]');
+            let basePrice = parseInt(basePriceElement.getAttribute('data-base-price'));
+            let finalPrice = basePrice;
+
+            if (size === 'medium') {
+                finalPrice += 1000;
+            } else if (size === 'large') {
+                finalPrice += 2000;
+            }
+
+            if (color === 'Chartreuse') {
+                finalPrice += 500;
+            } else if (color === 'Pink') {
+                finalPrice += 1000;
+            }
+
+            document.getElementById('price').innerHTML = `Price: PKR <span data-base-price="${basePrice}">${finalPrice.toLocaleString()}</span>`;
+        }
+
+        function addToCart(productName) {
+            let size = document.getElementById('size').value;
+            let color = document.getElementById('color').value;
+            let price = document.querySelector('#price span[data-base-price]').textContent;
+
+            let cartItem = `${productName} - ${size}, ${color} - ${price}`;
+            let cartItems = document.getElementById('cartItems');
+            let li = document.createElement('li');
+            li.textContent = cartItem;
+            cartItems.appendChild(li);
+
+            document.getElementById('cartPopup').style.display = 'block';
+        }
+
+        function closeCart() {
+            document.getElementById('cartPopup').style.display = 'none';
+        }
+    </script>
+</body>
+</html>
